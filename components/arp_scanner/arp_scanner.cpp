@@ -31,15 +31,17 @@ void ArpScannerComponent::perform_scan(const std::string &base_ip) {
     ip4_addr_t target_ip;
     
     if (ip4addr_aton(target_str.c_str(), &target_ip)) {
-      etharp_query(net_interface, &target_ip, NULL);
+      // FIX: etharp_request() automatically constructs a valid ARP buffer
+      // and safely dispatches it without triggering a core stack panic.
+      etharp_request(net_interface, &target_ip);
     }
     
     // Yield to the ESPHome framework loop to prevent watchdog reset
-    delay(5); 
+    delay(10); 
   }
 
   // Give network devices 250 milliseconds to stream responses back
-  delay(250);
+  delay(300);
 
   ESP_LOGI(TAG, "--- Active Devices Found ---");
   
