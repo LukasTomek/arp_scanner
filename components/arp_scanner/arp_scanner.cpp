@@ -84,7 +84,7 @@ void ArpScannerComponent::perform_scan(const std::string &base_ip) {
         
         // Push raw Layer 3 network segment frame payload down the wire directly
         raw_sendto(icmp_socket, packet_buffer, &target_ip);
-        
+        ESP_LOGI(TAG, "Send icmp packet to: %s" ipaddr_ntoa(&target_ip));
         // Free buffer to avoid a critical memory leak
         pbuf_free(packet_buffer);
       }
