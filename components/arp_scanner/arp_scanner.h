@@ -5,13 +5,12 @@
 
 namespace arp_scanner {
 
-// Inherit explicitly from esphome::Component
 class ArpScannerComponent : public esphome::Component {
  public:
   void setup() override;
   void dump_config() override;
 
-  // Custom execution method called from YAML
+  // Triggers the background ping sweep
   void perform_scan(const std::string &base_ip);
 };
 
