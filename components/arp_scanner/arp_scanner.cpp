@@ -1,4 +1,5 @@
 #include "arp_scanner.h"
+#include "esphome/core/log.h"
 #include <lwip/etharp.h>
 #include <lwip/netif.h>
 #include <lwip/ip_addr.h>
@@ -16,7 +17,7 @@ void ArpScannerComponent::dump_config() {
 }
 
 void ArpScannerComponent::perform_scan(const std::string &base_ip) {
-  ESP_LOGI(TAG, "Starting network ARP scan...");
+  ESP_LOGI(TAG, "Starting network ARP scan for subnet: %s0/24", base_ip.c_str());
 
   struct netif *net_interface = netif_list;
   if (net_interface == nullptr) {

@@ -1,12 +1,13 @@
 #pragma once
-#include "esphome.h"
+
+#include "esphome/core/component.h"
 #include <string>
 
 namespace arp_scanner {
 
-class ArpScannerComponent : public Component {
+// Inherit explicitly from esphome::Component
+class ArpScannerComponent : public esphome::Component {
  public:
-  // Lifecycle methods
   void setup() override;
   void dump_config() override;
 
