@@ -14,5 +14,5 @@ async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
     
-    # FIX: Correct way to register a .cpp source file asset in ESPHome
-    cg.add_build_file("arp_scanner.cpp")
+    # No source adding functions needed here! 
+    # ESPHome automatically discovers and builds arp_scanner.cpp.

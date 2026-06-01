@@ -50,9 +50,11 @@ void ArpScannerComponent::perform_scan(const std::string &base_ip) {
 
     if (etharp_get_entry(i, &ip_entry, &netif_entry, &mac_entry) == 1) {
       if (ip_entry->addr != 0) {
+        // FIX: Allocate a proper 16-byte character array buffer for IPv4 string formatting
         char ip_buffer[16];
         ip4addr_ntoa_r(ip_entry, ip_buffer, sizeof(ip_buffer));
         
+        // FIX: Explicitly target the 6 individual byte indices of the MAC array
         ESP_LOGI(TAG, "IP: %s | MAC: %02X:%02X:%02X:%02X:%02X:%02X",
                  ip_buffer,
                  mac_entry->addr[0], mac_entry->addr[1], mac_entry->addr[2],
