@@ -1,0 +1,30 @@
+esphome:
+  name: picow-arp-scanner
+
+rp2040:
+  board: rpipicow
+
+# 1. Pull the module files straight from Git
+external_components:
+  - source:
+      type: git
+      url: https://github.com
+    components: [ arp_scanner ]
+
+wifi:
+  ssid: "Your_WiFi_SSID"
+  password: "Your_WiFi_Password"
+
+# 2. Instantiate your custom component using its namespace ID
+arp_scanner:
+  id: my_arp_scanner
+
+time:
+  - platform: sntp
+    on_time:
+      - seconds: 0
+        minutes: /1
+        then:
+          - lambda: |-
+              // Execute the method directly from your compiled source
+              id(my_arp_scanner).perform_scan("192.168.1.");
