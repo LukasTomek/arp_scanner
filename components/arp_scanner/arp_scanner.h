@@ -10,7 +10,7 @@ class ArpScannerComponent : public esphome::Component {
   void setup() override;
   void dump_config() override;
 
-  // Triggers the background ping sweep
+  // Triggers the background raw network packet injection
   void perform_scan(const std::string &base_ip);
 };
 
