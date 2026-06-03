@@ -94,12 +94,11 @@ void ArpScannerComponent::perform_scan(const std::string &base_ip) {
     delay(5); 
   }
 
-  // Close and clean up the temporary native raw socket asset
-  raw_remove(icmp_socket);
-
   // Allow 400 milliseconds for network targets to echo standard packet streams back
   delay(400);
 
+  // Close and clean up the temporary native raw socket asset
+  raw_remove(icmp_socket);
   ESP_LOGI(TAG, "--- Active Network Devices Discovered ---");
   
   // Safely index entries out from the standard lwIP routing tables directly
